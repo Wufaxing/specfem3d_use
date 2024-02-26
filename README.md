@@ -14,3 +14,5 @@ meshfem3D_files 文件夹下
 (6) interfaces.dat文件  
 # step3:跑程序
 ./run_this_example.sh 即可，输出的文件都在OUTPUT_FILES文件夹内
+# 可视化
+ParaView软件可以绘制速度模型立体图(proc00000_vp.vtk),台站分布图(sr.vtk)和波场快照
