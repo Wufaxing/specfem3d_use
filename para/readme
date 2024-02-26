@@ -1,2 +1,31 @@
 # FKMODEL
 外部模型要和内部模型相匹配
+先改层数 NLAYER n
+密度 Vp Vs Z
+LAYER1     0
+LAYER2     -H1
+LAYER3     -(H1+H2)
+
+TAKE_OFF : 入射角，通过给定入射角间接给定震中距
+FREQUENCY_MAX : 最大频率，适度调大可提高分辨率，但同时会增加计算量
+TIME_WINDOW : 计算的整个时间窗范围，可以加大
+
+# Par_file 
+NPROC：申请的总核数
+计算方法：NPROC = NPROC_XI * NPROC_ETA (这两参数位于Mesh_Par_file中)
+最终合成波形的总时长 = NSTEP * DT
+
+# Mesh_Par_file
+DEPTH_BLOCK_KM ：实际模型深度，∞层的层厚一般选取为20km
+NEX_XI 必须是 NPROC_XI*8的倍数
+NEX_ETA 必须是 NPROC_ETA*8的倍数
+NEX_XI_END = NEX_XI
+NEX_ETA_END = NEX_ETA
+NZ_END = 垂向网格数，注意保证interface.dat文件的layer number 1(bottom layer)也要设定为同样的值
+横向距离：LATITUDE_MAX-LATITUDE_MIN 或者 LONGITUDE_MAX-LONGITUDE_MIN  
+垂向网格数计算方法：深度/(横向距离/NEX_XI)，例如 横向距离/NEX_XI=60/50≈2，NZ_END=DEPTH_BLOCK_KM/2=45
+
+# 可能出现的报错解决方案
+(1) 在OUTPUT_FILES中的output_meshfem3D.txt中找到 Maximum suggested time step for simulation (约在160行)，然后把par_file中的DT改小
+(2) 对于内存占用过多的情况，可以采用更多节点(节点数=ntasks(申请的总核数)/ntasks-per-node(指定每个节点的任务数))或者改小FREQUENCY_MAX
+节点由CPU和内存组成，一个节点包含16个CPU和128GB内存
