@@ -1,21 +1,19 @@
-
-% written by yifan lu 2021.4
-% ÓÃÓÚFK-SEM½¨Ä£
+% ç”¨äºŽFK-SEMå»ºæ¨¡
 
 clear;clc;tic;set(0,'defaultfigurecolor','w');
 cd C:\Users\22247\Desktop\SEM\test_demo\DATA\tomo_files;
 
-%% ²ÎÊý
+%% å‚æ•°
 
-% Èý·½Ïò¼«Öµ
-xmin = -30000;    % Æ½ÐÐÓÚÎ³Ïß·½Ïò
+% ä¸‰æ–¹å‘æžå€¼
+xmin = -30000;    % å¹³è¡ŒäºŽçº¬çº¿æ–¹å‘
 xmax =  30000;
-ymin = -30000;    % Æ½ÐÐÓÚ¾­Ïß·½Ïò
+ymin = -30000;    % å¹³è¡ŒäºŽç»çº¿æ–¹å‘
 ymax =  30000;
 zmin = -70000;
 zmax = 0;
 
-% Èý·½ÏòËÙ¶ÈÄ£ÐÍÀëÉ¢¸öÊý£¨²¢²»ÊÇ×îºó¼ÆËãÊ¹ÓÃµÄÍø¸ñ£¬¸ÃËÙ¶ÈÄ£ÐÍ²åÖµµ½Íø¸ñgllµãÉÏ£©
+% ä¸‰æ–¹å‘é€Ÿåº¦æ¨¡åž‹ç¦»æ•£ä¸ªæ•°ï¼ˆå¹¶ä¸æ˜¯æœ€åŽè®¡ç®—ä½¿ç”¨çš„ç½‘æ ¼ï¼Œè¯¥é€Ÿåº¦æ¨¡åž‹æ’å€¼åˆ°ç½‘æ ¼gllç‚¹ä¸Šï¼‰
 nx = 61;
 ny = 61;
 nz = 21;
@@ -23,15 +21,15 @@ hx = (xmax-xmin) / (nx-1);
 hy = (ymax-ymin) / (ny-1);
 hz = (zmax-zmin) / (nz-1);
 
-% ÆÁÄ»ÏÔÊ¾Íø¸ñ¼ä¾à
+% å±å¹•æ˜¾ç¤ºç½‘æ ¼é—´è·
 fprintf("grid on x = %8.2f m\n",hx);
 fprintf("grid on y = %8.2f m\n",hy);
 fprintf("grid on z = %8.2f m\n",hz);
 
-vp1 = 3.5;  vs1 = 1.9;     rho1 = 2.8;    % ³Á»ýÅèµØ¶¥½çÃæ
-vp2 = 6.2;  vs2 = 3.6;    rho2 = 2.8;    % ³Á»ýÅèµØµ×½çÃæ
-vp3 = 8.0;  vs3 = 4.5;    rho3 = 3.3;    % µØ¿Ç
-% vp4 = 8.1;  vs4 = 4.5;    rho4 = 3.2;    % ÉÏµØá£
+vp1 = 3.5;  vs1 = 1.9;     rho1 = 2.8;    % æ²‰ç§¯ç›†åœ°é¡¶ç•Œé¢
+vp2 = 6.2;  vs2 = 3.6;    rho2 = 2.8;    % æ²‰ç§¯ç›†åœ°åº•ç•Œé¢
+vp3 = 8.0;  vs3 = 4.5;    rho3 = 3.3;    % åœ°å£³
+% vp4 = 8.1;  vs4 = 4.5;    rho4 = 3.2;    % ä¸Šåœ°å¹”
 
 %% initialize models (true model)
 RHO = ones(nx,ny,nz);
@@ -84,9 +82,9 @@ for k = 1:1:nz
             
             end
             
-%             % ³Á»ýÅèµØ£¨Òì³£Ìå£©       ÐÞ¸Ä 5*sqrt(3) µÄµØ·½¼´¿É£¬Ò²¾ÍÊÇ¶ÔÓ¦µÄÁíÒ»¸öÖ±½Ç±ßµÄ³¤¶È
-%             if ( z >= -5 &&  abs(x) <= 20 - 5*sqrt(3)/5*abs(z) && abs(y) <= 20 - 5*sqrt(3)/5*abs(z) )              % Ð±ÆÂÇãÐ±30¡ã
-% %             if ( z >= -5 &&  abs(x) <= 20 - 5/5*abs(z) && abs(y) <= 20 - 5/5*abs(z) )                              % Ð±ÆÂÆÂ¶È45¡ã
+%             % æ²‰ç§¯ç›†åœ°ï¼ˆå¼‚å¸¸ä½“ï¼‰       ä¿®æ”¹ 5*sqrt(3) çš„åœ°æ–¹å³å¯ï¼Œä¹Ÿå°±æ˜¯å¯¹åº”çš„å¦ä¸€ä¸ªç›´è§’è¾¹çš„é•¿åº¦
+%             if ( z >= -5 &&  abs(x) <= 20 - 5*sqrt(3)/5*abs(z) && abs(y) <= 20 - 5*sqrt(3)/5*abs(z) )              % æ–œå¡å€¾æ–œ30Â°
+% %             if ( z >= -5 &&  abs(x) <= 20 - 5/5*abs(z) && abs(y) <= 20 - 5/5*abs(z) )                              % æ–œå¡å¡åº¦45Â°
 %                 vp_tmp(i) = vp1 + (vp2 - vp1) * abs(z)/5 ;
 %                 vs_tmp(i) = vs1 + (vs2 - vs1) * abs(z)/5  ;
 %                 rho_tmp(i) = rho1 + (rho2 - rho1) * abs(z)/5  ;
@@ -96,7 +94,7 @@ for k = 1:1:nz
         
         VP(:,j,k) = 1000.*vp_tmp;
         VS(:,j,k) = 1000.*vs_tmp;
-        RHO(:,j,k) = 1000.*rho_tmp;  % ÑØ×Åx·½ÏòÄ£ÐÍ±»¸´ÖÆÎª3DÄ£ÐÍ
+        RHO(:,j,k) = 1000.*rho_tmp;  % æ²¿ç€xæ–¹å‘æ¨¡åž‹è¢«å¤åˆ¶ä¸º3Dæ¨¡åž‹
         
     end
     
@@ -105,12 +103,12 @@ for k = 1:1:nz
     end
 end
 
-figure;  % Æ½ÐÐÓÚÎ³ÏßÇÐÆ¬
+figure;  % å¹³è¡ŒäºŽçº¬çº¿åˆ‡ç‰‡
 subplot(1,5,[1 2]);
 imagesc(X/1000,Z/1000,squeeze(VP(:,round(ny/2),:))'); axis image; set(gca,'Ydir','normal')
 title(' V_p true model cross-section');axis image;ylabel(' depth (km)');xlabel('x longitude (km)');axis equal;colorbar;
 
-subplot(1,5,[3 4 5]);  % Æ½ÐÐÓÚ¾­ÏßÇÐÆ¬
+subplot(1,5,[3 4 5]);  % å¹³è¡ŒäºŽç»çº¿åˆ‡ç‰‡
 imagesc(Y/1000,Z/1000,squeeze(VP(round(nx/2),:,:))'); axis image; set(gca,'Xdir','normal')
 title(' V_p true model cross-section');axis image;ylabel(' depth (km)');xlabel('y latitude (km)');set(gca,'ydir','normal');axis equal;colorbar;
 set(gcf,'Units','centimeter','Position',[30 10 30 15]);
@@ -121,8 +119,8 @@ return
 
 %% write  model in disk
 
-% TRUE Î´¹â»¬
-
+% TRUE æœªå…‰æ»‘
+% è¾“å‡ºæ¨¡åž‹æ–‡ä»¶
 fid = fopen('tomography_model.xyz','w');
 fprintf(fid,'#------------------------\n');
 fprintf(fid,'# Sample tomographic file\n');
